@@ -73,9 +73,14 @@ export async function POST(request: NextRequest) {
               ? 'active' 
               : 'none';
 
+          const periodEnd = (subscription as any).current_period_end;
+          const currentPeriodEnd = periodEnd 
+            ? new Date(periodEnd * 1000) 
+            : undefined;
+
           await Subscription.findByIdAndUpdate(dbSubscription._id, {
             status,
-            currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+            ...(currentPeriodEnd && { currentPeriodEnd }),
           });
 
           await User.findByIdAndUpdate(dbSubscription.userId, {

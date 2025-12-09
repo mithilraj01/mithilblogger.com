@@ -3,10 +3,10 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Initialize AI clients
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY || 'sk-dummy-key-for-build',
 });
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'dummy-key-for-build');
 
 // Types for AI functions
 interface OptimizeContentParams {
